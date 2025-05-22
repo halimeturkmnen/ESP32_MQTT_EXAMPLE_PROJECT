@@ -50,3 +50,20 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Flutter
+build/
+.dart_tool/
+.packages
+.pub-cache/
+.flutter-plugins
+.idea/
+
+# ESP-IDF
+build/
+sdkconfig.old
+*.pyc
+*.bin
+
+# Sertifikalar
+*.pem

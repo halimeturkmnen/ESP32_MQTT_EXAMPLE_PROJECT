@@ -1,0 +1,740 @@
+[
+    {
+        "id": "4d5c1bc4b4e41d08",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b201a8efc45f06bd",
+        "type": "ui_switch",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "8eaaabb392e1115e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "1c680e1360697856"
+            ]
+        ]
+    },
+    {
+        "id": "33350e7477ccd97e",
+        "type": "ui_chart",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "group": "8eaaabb392e1115e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 507.99999046325684,
+        "y": 258.0000190734863,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c680e1360697856",
+        "type": "mqtt out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "topic": "esp/out",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cf7bfe89ccd86a28",
+        "x": 520,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5fca403eadedf02b",
+        "type": "mqtt in",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "topic": "esp/in/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4604a3ffe100b923",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "33350e7477ccd97e",
+                "b3880ee840a5f203",
+                "3963b23843a1cdee"
+            ]
+        ]
+    },
+    {
+        "id": "b3880ee840a5f203",
+        "type": "file",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "filename": "C:\\Users\\SD\\OneDrive\\Belgeler\\verilerTemperature.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 657.9999904632568,
+        "y": 318.0000190734863,
+        "wires": [
+            [
+                "fa0b109ecdaf2114"
+            ]
+        ]
+    },
+    {
+        "id": "fa0b109ecdaf2114",
+        "type": "debug",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8b6b064f6e369745",
+        "type": "Firestore out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "Temperature Firestore Out",
+        "collection": "esp32",
+        "document": "temperature",
+        "operation": "set",
+        "admin": "881d2e96156b942a",
+        "eject": false,
+        "x": 730,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3963b23843a1cdee",
+        "type": "function",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "function 3",
+        "func": "msg.payload = {\n    value: parseFloat(msg.payload),\n    timestamp: new Date().toISOString()\n};\nmsg.documentPath = \"esp32/temperature\"; // Firestore doküman yolu\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "8b6b064f6e369745"
+            ]
+        ]
+    },
+    {
+        "id": "8f12eda8c97193be",
+        "type": "ui_chart",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "group": "8eaaabb392e1115e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 510,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e2a4e171d5d52ec",
+        "type": "mqtt in",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "topic": "esp/in/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4604a3ffe100b923",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 262.00000953674316,
+        "y": 501.9999809265137,
+        "wires": [
+            [
+                "8f12eda8c97193be",
+                "1047b7b2b8509eb7",
+                "65d9f7db8718f52d"
+            ]
+        ]
+    },
+    {
+        "id": "1047b7b2b8509eb7",
+        "type": "file",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "filename": "C:\\Users\\SD\\OneDrive\\Belgeler\\verilerHumidity.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 650,
+        "y": 580,
+        "wires": [
+            [
+                "9e76a51fb3ef86e8"
+            ]
+        ]
+    },
+    {
+        "id": "9e76a51fb3ef86e8",
+        "type": "debug",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "02918186b0547ce8",
+        "type": "Firestore out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "Temperature Firestore Out",
+        "collection": "esp32",
+        "document": "humidity",
+        "operation": "set",
+        "admin": "881d2e96156b942a",
+        "eject": false,
+        "x": 732.0000095367432,
+        "y": 681.9999809265137,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65d9f7db8718f52d",
+        "type": "function",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "function 4",
+        "func": "msg.payload = {\n    value: parseFloat(msg.payload),\n    timestamp: new Date().toISOString()\n};\nmsg.documentPath = \"esp32/humidity\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 522.0000095367432,
+        "y": 681.9999809265137,
+        "wires": [
+            [
+                "02918186b0547ce8"
+            ]
+        ]
+    },
+    {
+        "id": "7e6376b44fa92368",
+        "type": "ui_chart",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "group": "8eaaabb392e1115e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 510,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd8f7b0ba1be1f96",
+        "type": "mqtt in",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "topic": "esp/in/light",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4604a3ffe100b923",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 242.00000953674316,
+        "y": 801.9999809265137,
+        "wires": [
+            [
+                "7e6376b44fa92368",
+                "f4de1966fd5e99ab",
+                "e4850b93ec712c06"
+            ]
+        ]
+    },
+    {
+        "id": "f4de1966fd5e99ab",
+        "type": "file",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "",
+        "filename": "C:\\Users\\SD\\OneDrive\\Belgeler\\verilerLight.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 640,
+        "y": 880,
+        "wires": [
+            [
+                "eb7c1a54cd9fb9fc"
+            ]
+        ]
+    },
+    {
+        "id": "eb7c1a54cd9fb9fc",
+        "type": "debug",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "1db1534d50de3a7b",
+        "type": "Firestore out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "Temperature Firestore Out",
+        "collection": "esp32",
+        "document": "light",
+        "operation": "set",
+        "admin": "881d2e96156b942a",
+        "eject": false,
+        "x": 732.0000095367432,
+        "y": 981.9999809265137,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4850b93ec712c06",
+        "type": "function",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "function 5",
+        "func": "msg.payload = {\n    value: parseFloat(msg.payload),\n    timestamp: new Date().toISOString()\n};\nmsg.documentPath = \"esp32/light\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 522.0000095367432,
+        "y": 981.9999809265137,
+        "wires": [
+            [
+                "1db1534d50de3a7b"
+            ]
+        ]
+    },
+    {
+        "id": "64b3158c61d6d21c",
+        "type": "Firestore in",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "commands/temperature",
+        "collection": "commands",
+        "group": false,
+        "document": "temperature",
+        "realtime": true,
+        "query": [],
+        "admin": "881d2e96156b942a",
+        "snapHandler": "",
+        "eject": false,
+        "x": 330,
+        "y": 1140,
+        "wires": [
+            [
+                "8014497aec03db15"
+            ]
+        ]
+    },
+    {
+        "id": "d98f75a76cec5251",
+        "type": "mqtt out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "home/temperature",
+        "topic": "home/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4604a3ffe100b923",
+        "x": 790,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "8014497aec03db15",
+        "type": "function",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "function 7",
+        "func": "var data = msg.payload;\nmsg.topic = \"home/temperature\";  // light ve humidity için değiştir\nmsg.payload = data.command;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1140,
+        "wires": [
+            [
+                "d98f75a76cec5251"
+            ]
+        ]
+    },
+    {
+        "id": "3cee845440884a3e",
+        "type": "Firestore in",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "commands/humidity",
+        "collection": "commands",
+        "group": false,
+        "document": "humidity",
+        "realtime": true,
+        "query": [],
+        "admin": "881d2e96156b942a",
+        "snapHandler": "",
+        "eject": false,
+        "x": 340,
+        "y": 1260,
+        "wires": [
+            [
+                "5a5e54c7f48961bb"
+            ]
+        ]
+    },
+    {
+        "id": "3eaeb5eac4285897",
+        "type": "mqtt out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "home/humidity",
+        "topic": "home/humidity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4604a3ffe100b923",
+        "x": 780,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "5a5e54c7f48961bb",
+        "type": "function",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "function 8",
+        "func": "var data = msg.payload;\nmsg.topic = \"home/humidity\";  // light ve humidity için değiştir\nmsg.payload = data.command;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1260,
+        "wires": [
+            [
+                "3eaeb5eac4285897"
+            ]
+        ]
+    },
+    {
+        "id": "d320950e53e7d297",
+        "type": "Firestore in",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "commands/light",
+        "collection": "commands",
+        "group": false,
+        "document": "light",
+        "realtime": true,
+        "query": [],
+        "admin": "881d2e96156b942a",
+        "snapHandler": "",
+        "eject": false,
+        "x": 360,
+        "y": 1380,
+        "wires": [
+            [
+                "d64aac79f0a5d9da"
+            ]
+        ]
+    },
+    {
+        "id": "60d7fe0dca514d62",
+        "type": "mqtt out",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "home/temperature",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4604a3ffe100b923",
+        "x": 790,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "d64aac79f0a5d9da",
+        "type": "function",
+        "z": "4d5c1bc4b4e41d08",
+        "name": "function 9",
+        "func": "var data = msg.payload;\nmsg.topic = \"home/light\";  // light ve humidity için değiştir\nmsg.payload = data.command;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1380,
+        "wires": [
+            [
+                "60d7fe0dca514d62"
+            ]
+        ]
+    },
+    {
+        "id": "8eaaabb392e1115e",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "fdd55248b3195c4c",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cf7bfe89ccd86a28",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.20.10.3",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "4604a3ffe100b923",
+        "type": "mqtt-broker",
+        "name": "esp32hivemq",
+        "broker": "7ab1e9bf6329443886532525b88adc36.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "esp32hivemq",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "topic1",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "881d2e96156b942a",
+        "type": "firebase admin",
+        "name": "esp32ProjectFirestore"
+    },
+    {
+        "id": "fdd55248b3195c4c",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
