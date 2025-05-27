@@ -1,0 +1,17 @@
+dependencies:
+  idf:
+    source:
+      type: idf
+    version: 5.4.0
+  led_strip:
+    dependencies: []
+    source:
+      path: /home/halime/esp32_wsl_example/components/led_strip
+      type: local
+    version: 3.0.1
+direct_dependencies:
+- espressif/led_strip
+- idf
+manifest_hash: d406c54e749df31011656d339832f15318eb05e96a367e0066be0cd9424e539b
+target: esp32c3
+version: 2.0.0

@@ -1,0 +1,30 @@
+{
+  "esp32": {
+    "humidity": {
+      "timestamp": "timestamp (ISO 8601)",
+      "value": "number"
+    },
+    "temperature": {
+      "timestamp": "timestamp (ISO 8601)",
+      "value": "number"
+    },
+    "light": {
+      "timestamp": "timestamp (ISO 8601)",
+      "value": "number"
+    }
+  },
+  "commands": {
+    "humidity": {
+      "command": "string (e.g., 'decrease')",
+      "timestamp": "human-readable string (e.g., May 2, 2025 at 2:13:16 PM UTC+3)"
+    },
+    "temperature": {
+      "command": "string",
+      "timestamp": "string"
+    },
+    "light": {
+      "command": "string",
+      "timestamp": "string"
+    }
+  }
+}

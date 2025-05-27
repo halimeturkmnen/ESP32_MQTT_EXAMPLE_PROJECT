@@ -1,0 +1,8 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPath": "/home/halime/esp/v5.4/esp-idf",
+    "idf.toolsPath": "/home/halime/.espressif",
+    "idf.pythonInstallPath": "/home/halime/.espressif/python_env/idf5.4_py3.12_env/bin/python",
+    "idf.flashType": "UART",
+    "idf.port": "/dev/ttyS0"
+}

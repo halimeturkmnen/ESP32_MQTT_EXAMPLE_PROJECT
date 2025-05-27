@@ -1,0 +1,395 @@
+[
+    {
+        "id": "ca5e53936050072d",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f54e51b47e31c7a8",
+        "type": "mqtt in",
+        "z": "ca5e53936050072d",
+        "name": "",
+        "topic": "esp/in/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4604a3ffe100b923",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "5e50eec5cbb06689"
+            ]
+        ]
+    },
+    {
+        "id": "27ff1516155b0b4b",
+        "type": "Firestore out",
+        "z": "ca5e53936050072d",
+        "name": "Temperature Firestore Out",
+        "collection": "esp32",
+        "document": "temperature",
+        "operation": "set",
+        "admin": "881d2e96156b942a",
+        "eject": false,
+        "x": 630,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5e50eec5cbb06689",
+        "type": "function",
+        "z": "ca5e53936050072d",
+        "name": "function 6",
+        "func": "msg.payload = {\n    value: parseFloat(msg.payload),\n    timestamp: new Date().toISOString()\n};\nmsg.documentPath = \"esp32/temperature\"; // Firestore doküman yolu\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 200,
+        "wires": [
+            [
+                "27ff1516155b0b4b"
+            ]
+        ]
+    },
+    {
+        "id": "2bc7fd88f8725f39",
+        "type": "mqtt in",
+        "z": "ca5e53936050072d",
+        "name": "",
+        "topic": "esp/in/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4604a3ffe100b923",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 260,
+        "wires": [
+            [
+                "0924ed88440cad38"
+            ]
+        ]
+    },
+    {
+        "id": "26a1b7e164c276c7",
+        "type": "Firestore out",
+        "z": "ca5e53936050072d",
+        "name": "Temperature Firestore Out",
+        "collection": "esp32",
+        "document": "humidity",
+        "operation": "set",
+        "admin": "881d2e96156b942a",
+        "eject": false,
+        "x": 627.9999904632568,
+        "y": 258.0000190734863,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0924ed88440cad38",
+        "type": "function",
+        "z": "ca5e53936050072d",
+        "name": "function 7",
+        "func": "msg.payload = {\n    value: parseFloat(msg.payload),\n    timestamp: new Date().toISOString()\n};\nmsg.documentPath = \"esp32/humidity\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 417.99999046325684,
+        "y": 258.0000190734863,
+        "wires": [
+            [
+                "26a1b7e164c276c7"
+            ]
+        ]
+    },
+    {
+        "id": "e7d88d1ceef5c1ae",
+        "type": "mqtt in",
+        "z": "ca5e53936050072d",
+        "name": "",
+        "topic": "esp/in/light",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4604a3ffe100b923",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "81c129493a485091"
+            ]
+        ]
+    },
+    {
+        "id": "ea4d77464feb885e",
+        "type": "Firestore out",
+        "z": "ca5e53936050072d",
+        "name": "Temperature Firestore Out",
+        "collection": "esp32",
+        "document": "light",
+        "operation": "set",
+        "admin": "881d2e96156b942a",
+        "eject": false,
+        "x": 627.9999904632568,
+        "y": 318.0000190734863,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "81c129493a485091",
+        "type": "function",
+        "z": "ca5e53936050072d",
+        "name": "function 8",
+        "func": "msg.payload = {\n    value: parseFloat(msg.payload),\n    timestamp: new Date().toISOString()\n};\nmsg.documentPath = \"esp32/light\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 417.99999046325684,
+        "y": 318.0000190734863,
+        "wires": [
+            [
+                "ea4d77464feb885e"
+            ]
+        ]
+    },
+    {
+        "id": "5e3eeee8191fcaa5",
+        "type": "Firestore in",
+        "z": "ca5e53936050072d",
+        "name": "commands/temperature",
+        "collection": "commands",
+        "group": false,
+        "document": "temperature",
+        "realtime": true,
+        "query": [],
+        "admin": "881d2e96156b942a",
+        "snapHandler": "",
+        "eject": false,
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "1b2e0ccfbb3dc699"
+            ]
+        ]
+    },
+    {
+        "id": "21a5be0bf0f4e6f5",
+        "type": "mqtt out",
+        "z": "ca5e53936050072d",
+        "name": "home/temperature",
+        "topic": "home/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4604a3ffe100b923",
+        "x": 670,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1b2e0ccfbb3dc699",
+        "type": "function",
+        "z": "ca5e53936050072d",
+        "name": "function 9",
+        "func": "var data = msg.payload;\nmsg.topic = \"home/temperature\";  // light ve humidity için değiştir\nmsg.payload = data.command;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "21a5be0bf0f4e6f5"
+            ]
+        ]
+    },
+    {
+        "id": "18bec05ed0df6fdd",
+        "type": "Firestore in",
+        "z": "ca5e53936050072d",
+        "name": "commands/humidity",
+        "collection": "commands",
+        "group": false,
+        "document": "humidity",
+        "realtime": true,
+        "query": [],
+        "admin": "881d2e96156b942a",
+        "snapHandler": "",
+        "eject": false,
+        "x": 220,
+        "y": 480,
+        "wires": [
+            [
+                "7d4a2ab405cbceaf"
+            ]
+        ]
+    },
+    {
+        "id": "adab02b8e6c5c8e9",
+        "type": "mqtt out",
+        "z": "ca5e53936050072d",
+        "name": "home/humidity",
+        "topic": "home/humidity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4604a3ffe100b923",
+        "x": 660,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "7d4a2ab405cbceaf",
+        "type": "function",
+        "z": "ca5e53936050072d",
+        "name": "function 10",
+        "func": "var data = msg.payload;\nmsg.topic = \"home/humidity\";  // light ve humidity için değiştir\nmsg.payload = data.command;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "adab02b8e6c5c8e9"
+            ]
+        ]
+    },
+    {
+        "id": "40da567bc17bdf53",
+        "type": "Firestore in",
+        "z": "ca5e53936050072d",
+        "name": "commands/light",
+        "collection": "commands",
+        "group": false,
+        "document": "light",
+        "realtime": true,
+        "query": [],
+        "admin": "881d2e96156b942a",
+        "snapHandler": "",
+        "eject": false,
+        "x": 240,
+        "y": 540,
+        "wires": [
+            [
+                "f5b6c6340c2e24dc"
+            ]
+        ]
+    },
+    {
+        "id": "4b29c95b025ebea7",
+        "type": "mqtt out",
+        "z": "ca5e53936050072d",
+        "name": "home/temperature",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4604a3ffe100b923",
+        "x": 670,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f5b6c6340c2e24dc",
+        "type": "function",
+        "z": "ca5e53936050072d",
+        "name": "function 11",
+        "func": "var data = msg.payload;\nmsg.topic = \"home/light\";  // light ve humidity için değiştir\nmsg.payload = data.command;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 540,
+        "wires": [
+            [
+                "4b29c95b025ebea7"
+            ]
+        ]
+    },
+    {
+        "id": "4604a3ffe100b923",
+        "type": "mqtt-broker",
+        "name": "esp32hivemq",
+        "broker": "7ab1e9bf6329443886532525b88adc36.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "esp32hivemq",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "topic1",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "881d2e96156b942a",
+        "type": "firebase admin",
+        "name": "esp32ProjectFirestore"
+    }
+]
